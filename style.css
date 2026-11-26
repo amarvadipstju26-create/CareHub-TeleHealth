@@ -1,0 +1,4 @@
+body { background: #f4f7fb; }
+.card { border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.denied { background: #fde8e8; border: 1px solid #f5c6c6; padding: 15px; border-radius: 8px; }
+.granted { background: #e6f4ea; border: 1px solid #a8d5b5; padding: 15px; border-radius: 8px; }
