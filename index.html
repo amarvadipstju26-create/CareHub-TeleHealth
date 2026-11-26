@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareHub - Telehealth Portal</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary px-3">
+  <span class="navbar-brand fw-bold">🏥 CareHub Telehealth</span>
+  <span class="badge bg-light text-dark" id="currentUserBadge">Not Logged In</span>
+</nav>
+
+<div class="container my-4">
+  <!-- ROLE PICKER - FR-01 -->
+  <div class="card mb-4">
+    <div class="card-header fw-bold">Step 1: Choose Your Role</div>
+    <div class="card-body d-flex gap-2 flex-wrap">
+      <select id="roleSelect" class="form-select w-auto">
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+      </select>
+      <select id="userSelect" class="form-select w-auto"></select>
+      <button class="btn btn-primary" onclick="login()">Login</button>
+      <button class="btn btn-outline-danger" onclick="resetData()">Reset Demo Data</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- PATIENTS / DOCTORS LIST -->
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-header fw-bold">Patients & Access</div>
+        <div class="card-body" id="patientList"></div>
+      </div>
+      <div class="card">
+        <div class="card-header fw-bold">Video Room - FR-04 (WebRTC)</div>
+        <div class="card-body">
+          <p class="small text-muted">Your Peer ID: <b id="myPeerId">Connecting...</b></p>
+          <input id="remotePeerId" class="form-control mb-2" placeholder="Enter other person's Peer ID">
+          <button class="btn btn-success btn-sm" onclick="startCall()">Start Video Call</button>
+          <button class="btn btn-danger btn-sm" onclick="endCall()">End Call</button>
+          <div class="d-flex gap-2 mt-2">
+            <video id="localVideo" autoplay muted playsinline style="width:48%;background:#000;border-radius:8px"></video>
+            <video id="remoteVideo" autoplay playsinline style="width:48%;background:#000;border-radius:8px"></video>
+          </div>
+          <p class="small mt-2 text-muted">Share your Peer ID with the other person to connect.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN PANEL -->
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-header fw-bold">Patient Record Viewer - FR-02</div>
+        <div class="card-body" id="recordViewer">
+          <p class="text-muted">Login and select a patient to view record.</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header fw-bold">Access Requests - FR-03</div>
+        <div class="card-body" id="requestPanel"></div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header fw-bold">E-Prescription - FR-05</div>
+        <div class="card-body" id="prescriptionPanel"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header fw-bold">Audit Log - FR-06 (Every Action Logged)</div>
+        <div class="card-body">
+          <button class="btn btn-sm btn-outline-secondary mb-2" onclick="exportAudit()">Export Audit Log (JSON)</button>
+          <div id="auditLog" style="max-height:300px;overflow:auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
